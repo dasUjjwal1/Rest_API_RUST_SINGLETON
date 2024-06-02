@@ -4,13 +4,14 @@ use axum::{extract::State, http::StatusCode, response::IntoResponse, Json};
 use serde_json::{json, Value};
 
 use crate::{
+    config::validator_config::ValidatedJson,
     model::user_model::{User, UserInput},
     SingletonContext,
 };
 
 pub async fn create_user(
     State(state): State<Arc<Mutex<SingletonContext>>>,
-    Json(body): Json<UserInput>,
+    ValidatedJson(body): ValidatedJson<UserInput>,
 ) -> Result<impl IntoResponse, (StatusCode, Json<Value>)> {
     let mut data = state.lock().unwrap();
     println!("{:?}", data);

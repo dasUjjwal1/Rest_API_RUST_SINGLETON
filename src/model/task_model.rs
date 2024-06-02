@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
+use validator::Validate;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Task {
@@ -20,7 +21,7 @@ impl Task {
     }
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct Tasks(Vec<Task>);
 
 impl Tasks {
@@ -81,7 +82,8 @@ impl Tasks {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, Validate)]
 pub struct TaskInput {
+    #[validate(length(min = 1, message = "Can not be empty"))]
     pub title: String,
 }

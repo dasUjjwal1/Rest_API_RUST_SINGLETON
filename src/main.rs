@@ -23,7 +23,7 @@ use controller::{
 use model::{task_model::Tasks, user_model::Users};
 // use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
 use tower_http::cors::CorsLayer;
-// pub mod config;
+pub mod config;
 pub mod controller;
 // pub mod gql;
 pub mod model;
